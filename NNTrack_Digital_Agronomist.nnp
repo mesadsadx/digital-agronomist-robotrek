@@ -1,0 +1,311 @@
+{
+  "project_name": "NNTrack_Digital_Agronomist",
+  "version": "2.3.1",
+  "created_at": "2026-10-10T12:00:00Z",
+  "license_key": "2Nnu-aNXP-AMZT-vyNS",
+  "project_mode": "big_data",
+  "task": "regression",
+  "author": "Команда АгроИнтеллект",
+  "dataset": {
+    "file_name": "yield_df_training_scaled.csv",
+    "relative_path": "./yield_df_training_scaled.csv",
+    "has_header": true,
+    "features_count": 6,
+    "feature_names": [
+      "Area",
+      "Item",
+      "Year",
+      "average_rain_fall_mm_per_year",
+      "pesticides_tonnes",
+      "avg_temp"
+    ],
+    "target_name": "hg/ha_yield",
+    "samples_total": 25723,
+    "train_samples": 20578,
+    "val_samples": 5145,
+    "validation_split": 0.2
+  },
+  "training_parameters": {
+    "batch_size": 64,
+    "epochs": 60,
+    "optimizer": "AdamW",
+    "learning_rate": 0.003,
+    "weight_decay": 1e-05,
+    "loss_function": "MSE",
+    "metric_function": "R2",
+    "scheduler": "CosineAnnealingLR",
+    "early_stopping": {
+      "enabled": true,
+      "monitor": "val_rmse",
+      "min_delta": 0.0001,
+      "patience": 7
+    }
+  },
+  "metrics_achieved": {
+    "R2": 0.9693,
+    "R2_score_points": 38.77,
+    "MAE": 0.0898,
+    "RMSE": 0.1484
+  },
+  "architecture_graph": {
+    "nodes": [
+      {
+        "id": "input_0",
+        "type": "Input",
+        "params": {
+          "shape": [
+            6
+          ]
+        },
+        "pos": [
+          100,
+          200
+        ]
+      },
+      {
+        "id": "dense_1",
+        "type": "Dense",
+        "params": {
+          "units": 256,
+          "bias": true
+        },
+        "pos": [
+          260,
+          200
+        ]
+      },
+      {
+        "id": "bn_2",
+        "type": "BatchNormalization",
+        "params": {},
+        "pos": [
+          420,
+          200
+        ]
+      },
+      {
+        "id": "act_3",
+        "type": "Activation",
+        "params": {
+          "function": "relu"
+        },
+        "pos": [
+          580,
+          200
+        ]
+      },
+      {
+        "id": "drop_4",
+        "type": "Dropout",
+        "params": {
+          "rate": 0.02
+        },
+        "pos": [
+          740,
+          200
+        ]
+      },
+      {
+        "id": "dense_5",
+        "type": "Dense",
+        "params": {
+          "units": 256,
+          "bias": true
+        },
+        "pos": [
+          900,
+          200
+        ]
+      },
+      {
+        "id": "bn_6",
+        "type": "BatchNormalization",
+        "params": {},
+        "pos": [
+          1060,
+          200
+        ]
+      },
+      {
+        "id": "act_7",
+        "type": "Activation",
+        "params": {
+          "function": "relu"
+        },
+        "pos": [
+          1220,
+          200
+        ]
+      },
+      {
+        "id": "drop_8",
+        "type": "Dropout",
+        "params": {
+          "rate": 0.02
+        },
+        "pos": [
+          1380,
+          200
+        ]
+      },
+      {
+        "id": "dense_9",
+        "type": "Dense",
+        "params": {
+          "units": 128,
+          "bias": true
+        },
+        "pos": [
+          1540,
+          200
+        ]
+      },
+      {
+        "id": "bn_10",
+        "type": "BatchNormalization",
+        "params": {},
+        "pos": [
+          1700,
+          200
+        ]
+      },
+      {
+        "id": "act_11",
+        "type": "Activation",
+        "params": {
+          "function": "relu"
+        },
+        "pos": [
+          1860,
+          200
+        ]
+      },
+      {
+        "id": "drop_12",
+        "type": "Dropout",
+        "params": {
+          "rate": 0.02
+        },
+        "pos": [
+          2020,
+          200
+        ]
+      },
+      {
+        "id": "dense_13",
+        "type": "Dense",
+        "params": {
+          "units": 64,
+          "bias": true
+        },
+        "pos": [
+          2180,
+          200
+        ]
+      },
+      {
+        "id": "bn_14",
+        "type": "BatchNormalization",
+        "params": {},
+        "pos": [
+          2340,
+          200
+        ]
+      },
+      {
+        "id": "act_15",
+        "type": "Activation",
+        "params": {
+          "function": "relu"
+        },
+        "pos": [
+          2500,
+          200
+        ]
+      },
+      {
+        "id": "dense_16",
+        "type": "Dense",
+        "params": {
+          "units": 1,
+          "bias": true
+        },
+        "pos": [
+          2660,
+          200
+        ]
+      }
+    ],
+    "links": [
+      {
+        "from": "input_0",
+        "to": "dense_1"
+      },
+      {
+        "from": "dense_1",
+        "to": "bn_2"
+      },
+      {
+        "from": "bn_2",
+        "to": "act_3"
+      },
+      {
+        "from": "act_3",
+        "to": "drop_4"
+      },
+      {
+        "from": "drop_4",
+        "to": "dense_5"
+      },
+      {
+        "from": "dense_5",
+        "to": "bn_6"
+      },
+      {
+        "from": "bn_6",
+        "to": "act_7"
+      },
+      {
+        "from": "act_7",
+        "to": "drop_8"
+      },
+      {
+        "from": "drop_8",
+        "to": "dense_9"
+      },
+      {
+        "from": "dense_9",
+        "to": "bn_10"
+      },
+      {
+        "from": "bn_10",
+        "to": "act_11"
+      },
+      {
+        "from": "act_11",
+        "to": "drop_12"
+      },
+      {
+        "from": "drop_12",
+        "to": "dense_13"
+      },
+      {
+        "from": "dense_13",
+        "to": "bn_14"
+      },
+      {
+        "from": "bn_14",
+        "to": "act_15"
+      },
+      {
+        "from": "act_15",
+        "to": "dense_16"
+      }
+    ]
+  },
+  "export": {
+    "format": "TorchScript",
+    "file_name": "final_model_torchscript.pt",
+    "status": "ready"
+  }
+}

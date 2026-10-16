@@ -1,0 +1,5 @@
+{
+  "format": "TorchScript",
+  "file_name": "final_model_torchscript.pt",
+  "status": "ready"
+}
