@@ -1,12 +1,9 @@
 @echo off
-chcp 65001 >nul
-title Цифровой агроном: Прогноз урожайности ИИ (Роботрек)
-cd /d "%~dp0"
-echo ===============================================================
-echo  Запуск интерактивного прототипа «Цифровой агроном (ИИ)»
-echo  Хакатон «ИТ-Прорыв» 2026 ^| Партнер: «Роботрек»
-echo ===============================================================
-echo.
-echo [*] Запуск локального сервера инференса...
+title Digital Agronomist Prototype
+cd /d "C:\Users\metla\Desktop\digital-agronomist-robotrek"
 python app.py
+if errorlevel 1 (
+    cd /d "C:\Users\metla\Desktop"
+    python app.py
+)
 pause
